@@ -1,6 +1,6 @@
 # 使用说明
 
-目前已经适配`windows`以及`linux`系统下的`firefox`浏览器以及`windows`系统下的`chrome`浏览器
+目前已经适配`windows`以及`linux`系统下的`firefox`浏览器以及`windows`系统下的`chrome`与`edge`浏览器。
 
 ## 变更方法
 
@@ -70,4 +70,29 @@
    chromeOptions.addArguments("--remote-allow-origins=*");
    ```
 
-   
+
+### edge
+
+#### windows
+
+1. 设置调用方法为`makeEdgeDriver()`
+
+   ```java
+   WebDriver driver = this.makeEdgeDriver();
+   ```
+
+
+
+2. 设置驱动为`msedgedriver.exe`
+
+   ```java
+   System.setProperty("webdriver.edge.driver", "lib/edgedriver_win64/msedgedriver.exe");
+   ```
+
+   - `webdriver.edge.driver`：`edge`浏览器的设置方式
+
+3. 设置`edge`浏览器下默认只允许本地操作，解决`403`出错问题
+
+   ```java
+   edgeOptions.addArguments("--remote-allow-origins=*");
+   ```

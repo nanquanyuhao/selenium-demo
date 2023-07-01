@@ -6,6 +6,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
@@ -23,7 +25,7 @@ public class ITPubWorker {
         // 设置驱动地址
         System.setProperty("webdriver.chrome.driver", "lib/chromedriver_win32/chromedriver.exe");
         ChromeOptions chromeOptions = new ChromeOptions();
-        // chrome 浏览器下默认只允许本地操作，解决 403 出错问题
+        // chrome  内核浏览器下默认只允许本地操作，解决 403 出错问题
         chromeOptions.addArguments("--remote-allow-origins=*");
         return new ChromeDriver(chromeOptions);
     }
@@ -40,11 +42,21 @@ public class ITPubWorker {
         return new FirefoxDriver(firefoxOptions);
     }
 
+    private WebDriver makeEdgeDriver(){
+        // 设置驱动地址
+        System.setProperty("webdriver.edge.driver", "lib/edgedriver_win64/msedgedriver.exe");
+        EdgeOptions edgeOptions = new EdgeOptions();
+        // chrome 内核浏览器下默认只允许本地操作，解决 403 出错问题
+        edgeOptions.addArguments("--remote-allow-origins=*");
+        return new EdgeDriver(edgeOptions);
+    }
+
     public void execute() {
 
         // 初始化 web 测试驱动
         // WebDriver driver = this.makeChromeDriver();
-        WebDriver driver = this.makeFirefoxDriver();
+        // WebDriver driver = this.makeFirefoxDriver();
+        WebDriver driver = this.makeEdgeDriver();
         // 打开入口页
         driver.get("http://itpub.net/");
 
