@@ -6,21 +6,42 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.util.List;
 
 @Slf4j
 public class ITPubWorker {
 
-    public void execute() {
+    /**
+     * 反馈 chrome 浏览器驱动
+     *
+     * @return
+     */
+    private WebDriver makeChromeDriver(){
         // 设置驱动地址
-        // System.setProperty("webdriver.chrome.driver", "D:\\code\\github\\selenium-demo\\lib\\chromedriver_win32\\chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", "lib/chromedriver_win32/chromedriver.exe");
         ChromeOptions chromeOptions = new ChromeOptions();
-        // 默认只允许本地操作，解决 403 出错问题
+        // chrome 浏览器下默认只允许本地操作，解决 403 出错问题
         chromeOptions.addArguments("--remote-allow-origins=*");
+        return new ChromeDriver(chromeOptions);
+    }
+
+    private WebDriver makeFirefoxDriver(){
+        // 设置驱动地址
+        System.setProperty("webdriver.gecko.driver", "lib/geckodriver-v0.33.0-win64/geckodriver.exe");
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        // chrome 浏览器下默认只允许本地操作，解决 403 出错问题
+        // chromeOptions.addArguments("--remote-allow-origins=*");
+        return new FirefoxDriver(firefoxOptions);
+    }
+
+    public void execute() {
+
         // 初始化 web 测试驱动
-        WebDriver driver = new ChromeDriver(chromeOptions);
+        // WebDriver driver = this.makeChromeDriver();
+        WebDriver driver = this.makeFirefoxDriver();
         // 打开入口页
         driver.get("http://itpub.net/");
 
