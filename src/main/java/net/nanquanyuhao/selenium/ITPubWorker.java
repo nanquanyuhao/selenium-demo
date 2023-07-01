@@ -30,7 +30,10 @@ public class ITPubWorker {
 
     private WebDriver makeFirefoxDriver(){
         // 设置驱动地址
-        System.setProperty("webdriver.gecko.driver", "lib/geckodriver-v0.33.0-win64/geckodriver.exe");
+        // windows
+        // System.setProperty("webdriver.gecko.driver", "lib/geckodriver-v0.33.0-win64/geckodriver.exe");
+        // linux
+        System.setProperty("webdriver.gecko.driver", "lib/geckodriver-v0.33.0-linux64/geckodriver");
         FirefoxOptions firefoxOptions = new FirefoxOptions();
         // chrome 浏览器下默认只允许本地操作，解决 403 出错问题
         // chromeOptions.addArguments("--remote-allow-origins=*");
