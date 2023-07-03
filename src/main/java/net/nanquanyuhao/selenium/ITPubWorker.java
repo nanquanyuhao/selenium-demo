@@ -33,9 +33,9 @@ public class ITPubWorker {
     private WebDriver makeFirefoxDriver(){
         // 设置驱动地址
         // windows
-        // System.setProperty("webdriver.gecko.driver", "lib/geckodriver-v0.33.0-win64/geckodriver.exe");
+        System.setProperty("webdriver.gecko.driver", "lib/geckodriver-v0.33.0-win64/geckodriver.exe");
         // linux
-        System.setProperty("webdriver.gecko.driver", "lib/geckodriver-v0.33.0-linux64/geckodriver");
+        // System.setProperty("webdriver.gecko.driver", "lib/geckodriver-v0.33.0-linux64/geckodriver");
         FirefoxOptions firefoxOptions = new FirefoxOptions();
         // chrome 浏览器下默认只允许本地操作，解决 403 出错问题
         // chromeOptions.addArguments("--remote-allow-origins=*");
@@ -55,8 +55,8 @@ public class ITPubWorker {
 
         // 初始化 web 测试驱动
         // WebDriver driver = this.makeChromeDriver();
-        // WebDriver driver = this.makeFirefoxDriver();
-        WebDriver driver = this.makeEdgeDriver();
+        WebDriver driver = this.makeFirefoxDriver();
+        // WebDriver driver = this.makeEdgeDriver();
         // 打开入口页
         driver.get("http://itpub.net/");
 
@@ -71,12 +71,13 @@ public class ITPubWorker {
         // 获取官网前十页最新消息
         while (p <= 10) {
             // 获取当前页面新闻列表
+            // 样式如：<div class="right-box"><h4><a target="_blank" href="http://blog.itpub.net/">文本</a></h4></div>
             List<WebElement> titleList = driver.findElements(By.cssSelector("div.right-box h4 a"));
             for (WebElement title : titleList) {
                 log.info(String.format("%s\n\t->%s", title.getText(), title.getAttribute("href")));
             }
 
-            // 定位到“下一页”按钮
+            // 定位到“下一页”按钮：<div class="page"><a href="?page=5" target="_self">文本</a></div>
             List<WebElement> pages = driver.findElements(By.cssSelector("div.page a"));
             WebElement nextPage = pages.get(pages.size() - 1);
             // 触发下一页按钮单击事件
