@@ -1,1 +1,2 @@
 chrome:https://googlechromelabs.github.io/chrome-for-testing/
+edge:https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/
