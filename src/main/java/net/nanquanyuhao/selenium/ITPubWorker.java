@@ -22,8 +22,9 @@ public class ITPubWorker {
      * @return
      */
     private WebDriver makeChromeDriver(){
-        // 设置驱动地址
-        System.setProperty("webdriver.chrome.driver", "lib/chromedriver_win32/chromedriver.exe");
+        // 设置驱动地址，32 及 64 位均可
+        System.setProperty("webdriver.chrome.driver", "lib/chromedriver-win64/chromedriver.exe");
+        // System.setProperty("webdriver.chrome.driver", "lib/chromedriver-win32/chromedriver.exe");
         ChromeOptions chromeOptions = new ChromeOptions();
         // chrome  内核浏览器下默认只允许本地操作，解决 403 出错问题
         chromeOptions.addArguments("--remote-allow-origins=*");
@@ -55,8 +56,8 @@ public class ITPubWorker {
 
         // 初始化 web 测试驱动
         // WebDriver driver = this.makeChromeDriver();
-        WebDriver driver = this.makeFirefoxDriver();
-        // WebDriver driver = this.makeEdgeDriver();
+        // WebDriver driver = this.makeFirefoxDriver();
+        WebDriver driver = this.makeEdgeDriver();
         // 打开入口页
         driver.get("http://itpub.net/");
 
